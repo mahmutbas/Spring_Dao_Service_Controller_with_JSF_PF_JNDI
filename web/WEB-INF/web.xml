@@ -48,4 +48,13 @@
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
 
+    <!-- Tomcat 7 JNDI-->
+
+    <resource-ref>
+        <description>DB Connection</description>
+        <res-ref-name>jdbc/MahmutJNDI</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
+
 </web-app>

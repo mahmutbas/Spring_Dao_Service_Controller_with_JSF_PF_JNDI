@@ -6,13 +6,62 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-<f:view>
-    <h:outputLabel value="Hello, world canım benim"/>
-</f:view>
-
+<h:head>
+    <style type="text/css">
+        .colored {
+            background-color: #FF0000;
+            color: #FFFFFF;
+        }
+    </style>
+</h:head>
 <h:body>
-    <br/>
-    <a target="_blank" href="http://www.javacockpit.com"> <p:outputLabel value="www.javacockpit.com"></p:outputLabel> </a>
+
+    <h:form>
+        <p:growl id="growl" life="2000"/>
+        <a target="_blank" href="http://www.javacockpit.com"> <p:outputLabel value="www.javacockpit.com"></p:outputLabel> </a>
+        <br/>
+
+        <p:panelGrid columns="2">
+
+            <h:outputText value="Asset Number:"/>
+            <p:inputText value="#{assetController.assetItem.assetnum}"/>
+
+            <h:outputText value="Item Number:"/>
+            <p:inputText value="#{assetController.assetItem.itemnum}"/>
+
+            <h:outputText value="Item Description:"/>
+            <p:inputText value="#{assetController.assetItem.description}"/>
+
+            <h:outputText value="Location:"/>
+            <p:inputText value="#{assetController.assetItem.location}"/>
+
+            <h:inputHidden/>
+            <p:commandButton value="Save Asset to Grid" id="ajax" update="growl" action="#{assetController.addAssetItem}" styleClass="ui-priority-primary" ajax="false"/>
+
+        </p:panelGrid>
+
+        <p/>
+        <p:dataTable var="asset" value="#{assetController.assetService.current}"
+                     rowStyleClass="#{assetController.assetService.current.indexOf(asset) mod 2 eq 0 ? 'colored' : null}">
+            <p:column headerText="Asset Number">
+                <h:outputText value="#{asset.assetnum}"/>
+            </p:column>
+
+            <p:column headerText="Item Number">
+                <h:outputText value="#{asset.itemnum}"/>
+            </p:column>
+
+            <p:column headerText="Item Description">
+                <h:outputText value="#{asset.description}"/>
+            </p:column>
+
+            <p:column headerText="Location">
+                <h:outputText value="#{asset.location}"/>
+            </p:column>
+        </p:dataTable>
+
+    </h:form>
+
 </h:body>
 
 </html>
